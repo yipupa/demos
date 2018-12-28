@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>overflow scrolling</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html, body, .wrapper {
+            width: 100%;
+            height: 100%;
+        }
+        .wrapper {
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        ul {
+            list-style: none;
+            height: auto;
+        }
+        li {
+            height: 100px;;
+        }
+        li:nth-child(odd) {
+            background-color: yellowgreen;
+        }
+        li:nth-child(even) {
+            background-color: rgb(228, 98, 11);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <script>
+        var $wrapper = document.querySelector('.wrapper');
+        var height = $wrapper.getBoundingClientRect().height;
+        var lastX, lastY, newX, newY;
+        $wrapper.addEventListener('touchstart', function (e) {
+            // console.log(e, 'touchstart');
+            lastX = e.touches[0].clientX;
+            lastY = e.touches[0].clientY;
+        });
+        $wrapper.addEventListener('touchmove', function (e) {
+            newX = e.touches[0].clientX;
+            newY = e.touches[0].clientY;
+            // var isTop = ($wrapper.scrollTop <= 0) && (newX > lastX);
+            // var isBtm = ($wrapper.scrollTop >= $wrapper.scrollHeight - height) && (newY < lastY);
+            var isTop = $wrapper.scrollTop <= 0;
+            var isBtm = $wrapper.scrollTop >= $wrapper.scrollHeight - height;
+            if (isTop) {
+                console.log('pull top');
+            }
+            if (isBtm) {
+                console.log('pull bottom');
+            }
+            if (isTop || isBtm) {
+                e.preventDefault();
+                // e.stopPropagation();
+            }
+            lastX = newX;
+            lastY = newY;
+        }, {passive: false});
+    </script>
+</body>
+</html>

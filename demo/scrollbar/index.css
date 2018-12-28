@@ -1,0 +1,50 @@
+* {
+    scrollbar-base-color:#ffffff;
+    scrollbar-track-color:#ffffff;
+    scrollbar-darkshadow-color: #ffffff;
+    scrollbar-3dlight-color: #ffffff;
+    scrollbar-arrow-color:#757778;
+    scrollbar-shadow-color:#bec1c4;
+    scrollbar-highlight-color:#bec1c4;
+}
+
+::-webkit-scrollbar {
+    width: 16px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: blue;
+}
+
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:decrement,
+::-webkit-scrollbar-button:start:increment,
+::-webkit-scrollbar-button:end:increment{
+    border: solid 1px #000;
+}
+
+::-webkit-scrollbar-thumb {
+    border: solid 1px red;
+    background: red;
+    border-radius: 15px;
+}
+
+::-webkit-scrollbar-button:vertical:start:decrement,
+::-webkit-scrollbar-button:vertical:end:decrement {
+    background: url('data:image/gif;base64,R0lGODlhDwAPAIABAHV3eP///yH5BAEKAAEALAAAAAAPAA8AAAITjI+py+0PEYigvoob3rH7D4ZBAQA7') center no-repeat;
+}
+
+::-webkit-scrollbar-button:vertical:start:increment,
+::-webkit-scrollbar-button:vertical:end:increment {
+    background: url('data:image/gif;base64,R0lGODlhDwAPAIABAHV3eP///yH5BAEKAAEALAAAAAAPAA8AAAITjI+py+0P4wG0gmavq1HLD4ZiAQA7') center no-repeat;
+}
+
+::-webkit-scrollbar-button:horizontal:start:decrement,
+::-webkit-scrollbar-button:horizontal:end:decrement {
+    background: url('data:image/gif;base64,R0lGODlhDwAPAIABAHV3eP///yH5BAEKAAEALAAAAAAPAA8AAAIVjI+py+1vAAxAvmobzrpO/03iSDIFADs=') center no-repeat;
+}
+
+::-webkit-scrollbar-button:horizontal:start:increment,
+::-webkit-scrollbar-button:horizontal:end:increment {
+    background: url('data:image/gif;base64,R0lGODlhDwAPAIABAHV3eP///yH5BAEKAAEALAAAAAAPAA8AAAIVjI+py+0P3gFR0uouZtfu9kniSDYFADs=') center no-repeat;
+}
