@@ -13,8 +13,15 @@ let moveOnIndex,
 const positionMgr = [];
 let i = 0;
 while (i < $slides.length) {
-    positionMgr.push({index: i});
+    positionMgr.push({index: i, type: 'idx'});
     i ++;
+}
+
+const debounce = (func, delay) => {
+    return function() {
+        window.clearTimeout(debounce.timer);
+        debounce.timer = window.setTimeout(func, delay);
+    }
 }
 
 const getMoveOverSlide = (len, y, temp) => {
@@ -44,27 +51,43 @@ const setSlideStyle = (onIdx, overIdx, isMoveDown) => {
         return;
     }
     // const $slide = $slides[overIdx];
-    const positionInfo = positionMgr[overIdx];
-    if (isMoveDown) {
-        positionMgr[overIdx].index = onIdx;
-        positionMgr[onIdx].index = overIdx;
-    } else {
+    // const positionInfo = positionMgr[overIdx];
+    // if (isMoveDown) {
+    //     positionMgr[overIdx].index = onIdx;
+    //     positionMgr[onIdx].index = overIdx;
+    // } else {
         
-    }
+    // }
     // if (isMoveDown) {
     //     $slide.style.transform = `translate3d(0,${-60}px,0)`;
     // } else {
     //     $slide.style.transform = `translate3d(0,${60}px,0)`;
     // }
+
+    positionMgr[overIdx].index = onIdx;
+    positionMgr[onIdx].index = overIdx;
+
+    console.log(positionMgr)
 }
 
-$slides.forEach((slide, index) => {
+const renderTransform = () => {
+    positionMgr.forEach((pos, idx) => {
+        if (pos.index !== idx) {
+           const temp =  pos.index - idx;
+           $slides[pos.index].style.transform = `translate3d(0,${- temp * 60}px,0)`;
+        }
+    });
+}
+
+$slides.forEach(slide => {
+    const index = slide.getAttribute('data-index') - 1 ;
     slide.addEventListener('mousedown', (e) => {
         const {clientY} =  e || window.event;
         prevY = clientY;
         moveOnIndex = index;
         canSortMove = true;
         $fakeSlide.appendChild(slide.cloneNode(true));
+        positionMgr[moveOnIndex].type = 'ph';
     });
 });
 
@@ -76,6 +99,8 @@ document.addEventListener('mousemove', (e) => {
         const isMoveDown = prevY < clientY;
 
         setSlideStyle(moveOnIndex, moveOverIndex, isMoveDown);
+
+        renderTransform();
 
         prevY = clientY;
         
@@ -90,7 +115,8 @@ document.addEventListener('mouseup', (e) => {
     canSortMove = false;
 
     $slides.forEach(slide => slide.classList.remove('move-over'));
-    $slides.forEach(slide => slide.style.transform = 'translate3d(0,0,0)');
+    // $slides.forEach(slide => slide.style.transform = 'translate3d(0,0,0)');
+    positionMgr.forEach(item => item.type = 'idx');
 
     $fakeSlide.classList.remove('visible');
     $fakeSlide.innerHTML = '';
