@@ -9,46 +9,53 @@
     <style>
         #wrapper {
             height: 600px;
-            width: 500px;
+            width: 100px;
             overflow-y: auto;
-            margin: 100px auto;
+            margin: 100px 10px;
             box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3);
         }
-        #wrapper li {
+        #wrapper .slide {
             height: 60px;
             text-align: center;
             line-height: 60px;
             user-select:none;
-            transition: all 0.3s linear;
+            /* transition: all 0.3s linear; */
         }
         .move-over {
             opacity: 0;
         }
-        li {
+        .slide {
             box-shadow: inset 0 0 8px 0 rgba(0, 0, 0, 0.4);
         }
         #fake_slide {
-            position: fixed;
+            position: absolute;
             left: 0;
             top: 0;
             visibility: hidden;
             height: 60px;
-            width: 500px;
+            width: 100px;
             box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.4);
         }
-        #fake_slide li {
+        .drag-on {
+            opacity: 0;
+        }
+        #fake_slide .slide {
             text-align: center;
             line-height: 60px;
         }
         #fake_slide.visible {
             visibility: visible;
         }
+        ::-webkit-scrollbar {
+            width: 0;
+            visibility: hidden;
+        }
     </style>
 </head>
 <body>
-    <ul id="fake_slide"></ul>
-    <ul id="wrapper">
-        <li data-index="1">1</li>
+    <div id="fake_slide"></div>
+    <div id="wrapper">
+        <!-- <li data-index="1">1</li>
         <li data-index="2">2</li>
         <li data-index="3">3</li>
         <li data-index="4">4</li>
@@ -60,8 +67,8 @@
         <li data-index="10">10</li>
         <li data-index="11">11</li>
         <li data-index="12">12</li>
-        <li data-index="13">13</li>
-    </ul>
+        <li data-index="13">13</li> -->
+        </div>
     <script src="./index.js"></script>
 </body>
 </html>
