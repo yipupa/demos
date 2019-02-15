@@ -1,126 +1,113 @@
 const $wrapper = document.getElementById('wrapper');
-const $slides = Array.prototype.slice.call($wrapper.children);
+// const $slides = Array.prototype.slice.call($wrapper.children);
 const $fakeSlide = document.getElementById('fake_slide');
-const {width, height} = $fakeSlide.getBoundingClientRect();
+const { width, height } = $fakeSlide.getBoundingClientRect();
 const wrapperTop = $wrapper.getBoundingClientRect().top;
 
 let moveOnIndex,
     moveOverIndex,
     canSortMove = false,
+    relaX,
+    relaY;
     // startPosition,
-    prevY;
+    // prevY;
 
-const positionMgr = [];
+const slideManager = [];
 let i = 0;
-while (i < $slides.length) {
-    positionMgr.push({index: i, type: 'idx'});
-    i ++;
+while (i < 6) {
+    slideManager.push({ index: i, position: i });
+    i++;
 }
 
-const debounce = (func, delay) => {
-    return function() {
+function debounce(func, delay) {
+    return function () {
         window.clearTimeout(debounce.timer);
         debounce.timer = window.setTimeout(func, delay);
     }
 }
 
-const getMoveOverSlide = (len, y, temp) => {
-    let idx = -1;
-    for (let i = 0; i < len; i ++) {
-        const st = temp + i * 60;
-        const sb = temp + (i + 1) * 60;
-        if (y <= sb && y >= st) {
-            idx = i;
-            flag = true;
-            break;
-        }
-        if (i === 0 && y < st) {
-            idx = 0;
-            flag = true;
-            break;
-        }
-    }
-    if (!flag) {
+function getMoveOverSlide(len, y, temp) {
+    let idx;
+    if (y <= temp) {
+        idx = 0;
+    } else if (y >= (60 * len + temp)) {
         idx = len - 1;
+    } else {
+        for (let i = 0; i < len; i++) {
+            const st = temp + i * 60;
+            const sb = temp + (i + 1) * 60;
+            if (y < sb && y > st) {
+                idx = i;
+                break;
+            }
+        }
     }
+    
     return idx;
 }
 
-const setSlideStyle = (onIdx, overIdx, isMoveDown) => {
-    if (onIdx === overIdx) {
-        return;
-    }
-    // const $slide = $slides[overIdx];
-    // const positionInfo = positionMgr[overIdx];
-    // if (isMoveDown) {
-    //     positionMgr[overIdx].index = onIdx;
-    //     positionMgr[onIdx].index = overIdx;
-    // } else {
-        
-    // }
-    // if (isMoveDown) {
-    //     $slide.style.transform = `translate3d(0,${-60}px,0)`;
-    // } else {
-    //     $slide.style.transform = `translate3d(0,${60}px,0)`;
-    // }
-
-    positionMgr[overIdx].index = onIdx;
-    positionMgr[onIdx].index = overIdx;
-
-    console.log(positionMgr)
+function renderDom() {
+    slideManager.forEach(item => {
+        const $slide = document.createElement('div');
+        $slide.classList.add('slide');
+        $slide.innerHTML = item.index;
+        $slide.addEventListener('mousedown', e => {
+            slideMouseDown(e, item.index);
+        });
+        $wrapper.appendChild($slide);
+    });
 }
 
-const renderTransform = () => {
-    positionMgr.forEach((pos, idx) => {
-        if (pos.index !== idx) {
-           const temp =  pos.index - idx;
-           $slides[pos.index].style.transform = `translate3d(0,${- temp * 60}px,0)`;
+function slideMouseDown(e, idx) {
+    const { target, clientX, clientY } = e || window.event;
+    const { left, top } = target.getBoundingClientRect();
+    const $moveSlide = Array.prototype.slice.call($wrapper.children)[idx];
+    this.$moveSlide = $moveSlide;
+    moveOnIndex = idx;
+    canSortMove = true;
+    relaX = clientX - left;
+    relaY = clientY - top;
+    $fakeSlide.innerHTML = '';
+    $fakeSlide.appendChild(target.cloneNode(true));
+    $fakeSlide.style.left = `${left}px`;
+    $fakeSlide.style.top = `${top}px`;
+}
+
+function mouseMove(e) {
+    if (canSortMove) {
+        const { clientX, clientY } = e || window.event;
+        $fakeSlide.style.left = `${clientX - relaX}px`;
+        $fakeSlide.style.top = `${clientY - relaY}px`;
+        if ($fakeSlide.classList.value.indexOf('visible') === -1) {
+            $fakeSlide.classList.add('visible');
         }
-    });
+        if (this.$moveSlide.classList.value.indexOf('drag-on') === -1) {
+            this.$moveSlide.classList.add('drag-on');
+        }
+        const $slides = Array.prototype.slice.call($wrapper.children);
+        const moveOverIndex = getMoveOverSlide($slides.length, clientY, wrapperTop);
+        setMoveOverSlide(moveOverIndex);
+    }
 }
 
-$slides.forEach(slide => {
-    const index = slide.getAttribute('data-index') - 1 ;
-    slide.addEventListener('mousedown', (e) => {
-        const {clientY} =  e || window.event;
-        prevY = clientY;
-        moveOnIndex = index;
-        canSortMove = true;
-        $fakeSlide.appendChild(slide.cloneNode(true));
-        positionMgr[moveOnIndex].type = 'ph';
-    });
-});
+function mouseUp() {
+    delete moveOnIndex, relaX, relaY;
+    canSortMove = false;
+    $fakeSlide.innerHTML = '';
+    $fakeSlide.classList.remove('visible');
+    this.$moveSlide && this.$moveSlide.classList.remove('drag-on');
+}
+
+function setMoveOverSlide(idx) {
+    const $moveOverSlide = idx;
+}
 
 document.addEventListener('mousemove', (e) => {
-    if (canSortMove) {
-        const {clientX, clientY} = e || event;
-        
-        const moveOverIndex = getMoveOverSlide($slides.length, clientY, wrapperTop);
-        const isMoveDown = prevY < clientY;
-
-        setSlideStyle(moveOnIndex, moveOverIndex, isMoveDown);
-
-        renderTransform();
-
-        prevY = clientY;
-        
-        $slides[moveOnIndex].classList.add('move-over');
-        $fakeSlide.style.left = `${clientX - width / 2}px`;
-        $fakeSlide.style.top = `${clientY - height / 2}px`;
-        $fakeSlide.classList.add('visible');
-    }
+    mouseMove(e);
 })
 
 document.addEventListener('mouseup', (e) => {
-    canSortMove = false;
-
-    $slides.forEach(slide => slide.classList.remove('move-over'));
-    // $slides.forEach(slide => slide.style.transform = 'translate3d(0,0,0)');
-    positionMgr.forEach(item => item.type = 'idx');
-
-    $fakeSlide.classList.remove('visible');
-    $fakeSlide.innerHTML = '';
-    $fakeSlide.style.left = 0;
-    $fakeSlide.style.top = 0;
+    mouseUp();
 })
 
+renderDom();
