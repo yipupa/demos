@@ -4,17 +4,36 @@ import './App.scss';
 // import DragactComponent from './components/DragactComponent';
 // import ReactBeautifulDnd from './components/ReactBeautifulDnd';
 // import Observer from './components/Observer';
-import Algorithm from './algorithm';
+// import Algorithm from './algorithm';
+// import Test from './Test';
+import ThirdpartyDocer from './components/ThirdpartyDocer/index'
 
 class App extends Component {
+    state = {
+        showDialog: false
+    }
+
+    onClick = () => {
+        this.setState({
+            showDialog: !this.state.showDialog
+        })
+    }
+
     render() {
+        const { showDialog } = this.state
         return (
             <div className="App">
                 {/* <MoveAnimation /> */}
                 {/* <DragactComponent /> */}
                 {/* <ReactBeautifulDnd /> */}
                 {/* <Observer /> */}
-                <Algorithm />
+                {/* <Algorithm /> */}
+                {/* <Test /> */}
+                <button onClick={this.onClick}>show ThirdpartyDocer</button>
+                {
+                    showDialog &&
+                    <ThirdpartyDocer />
+                }
             </div>
         );
     }
