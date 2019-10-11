@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        section {
+            overflow: hidden;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        section style {
+            display: block;
+        }
+
+        section+section {
+            margin-top: 10px;
+        }
+
+        article {
+            float: left;
+            width: 30%;
+        }
+
+        aside {
+            overflow: hidden;
+        }
+
+        .html,
+        .css {
+            background: #f6f6f6;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<!------------------------------------------------------->
+    <section class="section_1">
+        <article>
+            <div class="wrapper_1">
+                <img class="img_1" src="./img_1.png" alt="">
+                <img class="img_2" src="./img_2.jpg" alt="">
+            </div>
+        </article>
+        <aside>
+            <pre>
+                <code>
+                    <h2>HTML</h2>
+                    <div class="html">
+&lt;div class="wrapper_1"&gt;
+    &lt;img class="img_1" src="./img_1.png" alt=""&gt;
+    &lt;img class="img_2" src="./img_2.jpg" alt=""&gt;
+&lt;/div&gt;
+                    </div>
+                    <h2>CSS</h2>
+                    <div class="css">
+                        <style>
+.wrapper_1,
+.wrapper_1 img {
+    width: 100px;
+    height: 100px;
+}
+
+.wrapper_1 .img_2 {
+    display: none;
+}
+
+.wrapper_1:hover .img_2 {
+    display: block;
+}
+
+.wrapper_1:hover .img_1 {
+    display: none;
+}
+                        </style>
+                    </div>
+                </code>
+            </pre>
+
+        </aside>
+    </section>
+<!------------------------------------------------------->
+
+<!------------------------------------------------------->
+    <section class="section_2">
+        <article>
+            <div class="wrapper_2">
+                <img class="img_1" src="./img_1.png" alt="">
+                <img class="img_2" src="./img_2.jpg" alt="">
+            </div>
+        </article>
+        <aside>
+            <pre>
+                <code>
+                    <h2>HTML</h2>
+                    <div class="html">
+&lt;div class="wrapper_2"&gt;
+    &lt;img class="img_1" src="./img_1.png" alt=""&gt;
+    &lt;img class="img_2" src="./img_2.jpg" alt=""&gt;
+&lt;/div&gt;
+                    </div>
+                    <h2>CSS</h2>
+                    <div class="css">
+                        <style>
+.wrapper_2,
+.wrapper_2 img {
+    width: 100px;
+    height: 100px;
+}
+
+.wrapper_2 {
+    overflow: hidden;
+}
+
+.wrapper_2:hover .img_2 {
+    display: block;
+}
+
+.wrapper_2:hover .img_1 {
+    display: none;
+}
+                        </style>
+                    </div>
+                </code>
+            </pre>
+
+        </aside>
+    </section>
+<!------------------------------------------------------->
+</body>
+
+</html>
