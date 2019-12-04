@@ -1,11 +1,11 @@
 {
     "manifest_version": 2,
-    "name": "weboffice",
+    "name": "codesandbox",
     "version": "1.0.0",
-    "description": "金山文档",
+    "description": "codesandbox",
     "browser_action": {
         "default_icon": "images/logo.png",
-        "default_title": "金山文档"
+        "default_title": "codesandbox"
     },
     "background": {
         "scripts": [
@@ -13,11 +13,6 @@
         ],
         "persistent": false
     },
-    // "page_action": {
-    //     "default_popup": "html/popup.html",
-    //     "default_icon": "images/logo.png",
-    //     "default_title": "金山文档"
-    // },
     "options_page": "html/options.html",
     "icons": {
         "16": "images/logo.png",

@@ -1,0 +1,13 @@
+#editor and system files
+.DS_Store
+.vscode
+.git
+.idea
+Documents
+.config
+.swp
+.history
+
+#npm files
+node_modules/
+package-lock.json

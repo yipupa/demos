@@ -23,6 +23,6 @@ function openTab() {
 	// }
 }
 
-chrome.browserAction && chrome.browserAction.onClicked.addListener(function(tab) {
-    openTab();
+chrome.browserAction.onClicked.addListener(function(tab) {
+	openTab();
 });
