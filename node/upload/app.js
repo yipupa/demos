@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(bodyParser.json({ limit: '2100000kb' }));
 app.use(bodyParser.json());
 
+
 const upload = multer({
     storage: multer.diskStorage({
         destination: function (req, file, cb) {
