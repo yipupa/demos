@@ -28,6 +28,14 @@
     "permissions": [
         "activeTab",
         "declarativeContent", 
-        "storage"
-    ]
+        "storage",
+        "tabs",
+        "contextMenus",
+        "location",
+        "cookies",
+        "http://*/*", 
+        "https://*/*"
+    ],
+    // 只能指向一个HTML文件，不能是JS文件
+    "devtools_page": "html/devtools.html"
 }

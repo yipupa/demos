@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>切换分支</title>
+    <style>
+        #search_branch {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            padding: 8px;
+            background: #FFFFFF;
+            box-shadow: 0 2px 12px 0 rgba(56, 56, 56, 0.2);
+            border: 1px solid #E2E6ED;
+            border-radius: 2px;
+            list-style: none;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        #search_branch li {
+            padding: 4px 0;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        #search_branch li:hover {
+            background-color: #f8f8f8;
+        }
+        #branch_name {
+            color: red;
+            font-size: 18px;
+        } 
+        .tip {
+            padding: 2px 4px;
+            color: #c7254e;
+            background-color: #f8f8f8;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <!-- <div style="display: inline-block;">
+        <select id="branch" style="min-width: 200px;"></select>
+    </div> -->
+    <div style="display: inline-block;position: relative;">
+        <input id="search" type="text" placeholder="搜索分支名"/> 当前分支：<span id="branch_name"></span>
+        <ul id="search_branch" style="min-width: 200px;"></ul>
+    </div>
+    </select>
+    <p class="tip">如果找不到对应的分支, 说明没有启动构建或构建失败!</p>
+    <!-- <script src="../js/jquery.min.js"></script> -->
+    <script src="../js/switch-branch.js"></script>
+</body>
+
+</html>
