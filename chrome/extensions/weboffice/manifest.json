@@ -31,7 +31,7 @@
         "storage",
         "tabs",
         "contextMenus",
-        "location",
+        // "location",
         "cookies",
         "http://*/*", 
         "https://*/*"
