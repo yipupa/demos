@@ -1,0 +1,16 @@
+.list_wrap {
+    width: 500px;
+    max-height: 600px;
+    overflow: auto;
+    margin: 100px auto;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+    .list_item {
+        // padding: 100px 0;
+        font-size: 100px;
+        // width: 400%;
+        text-align: center;
+        &:nth-child(odd) {
+            background: yellowgreen;
+        }
+    }
+}

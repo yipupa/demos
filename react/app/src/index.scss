@@ -10,6 +10,10 @@ body,
     height: 100%;
 }
 
+#root {
+    overflow: hidden;
+} 
+
 ul {
     list-style: none;
 }

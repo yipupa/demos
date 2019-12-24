@@ -6,7 +6,8 @@ import './App.scss';
 // import Observer from './components/Observer';
 // import Algorithm from './algorithm';
 // import Test from './Test';
-import ThirdpartyDocer from './components/ThirdpartyDocer/index'
+// import ThirdpartyDocer from './components/ThirdpartyDocer/index'
+import List from './components/List';
 
 class App extends Component {
     state = {
@@ -20,7 +21,7 @@ class App extends Component {
     }
 
     render() {
-        const { showDialog } = this.state
+        // const { showDialog } = this.state
         return (
             <div className="App">
                 {/* <MoveAnimation /> */}
@@ -29,11 +30,12 @@ class App extends Component {
                 {/* <Observer /> */}
                 {/* <Algorithm /> */}
                 {/* <Test /> */}
-                <button onClick={this.onClick}>show ThirdpartyDocer</button>
-                {
+                {/* <button onClick={this.onClick}>show ThirdpartyDocer</button> */}
+                {/* {
                     showDialog &&
                     <ThirdpartyDocer />
-                }
+                } */}
+                <List />
             </div>
         );
     }
