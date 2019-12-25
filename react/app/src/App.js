@@ -14,10 +14,20 @@ class App extends Component {
         showDialog: false
     }
 
+
+    componentDidMount() {
+        const $btn = document.getElementById('btn');
+        $btn.addEventListener('click', this.handleClick)
+    }
+
     onClick = () => {
         this.setState({
             showDialog: !this.state.showDialog
         })
+    }
+
+    handleClick = e => {
+        console.log('handleClick---------')
     }
 
     render() {
@@ -36,6 +46,11 @@ class App extends Component {
                     <ThirdpartyDocer />
                 } */}
                 <List />
+                <div
+                    id="btn"
+                    // onClick={this.handleClick}
+                    className="btn"
+                >9</div>
             </div>
         );
     }

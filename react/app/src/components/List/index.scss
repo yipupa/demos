@@ -4,12 +4,16 @@
     overflow: auto;
     margin: 100px auto;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+    font-size: 0;
     .list_item {
         // padding: 100px 0;
-        font-size: 100px;
+        font-size: 50px;
         // width: 400%;
         text-align: center;
-        &:nth-child(odd) {
+        width: 50%;
+        float: left;
+        &:nth-child(4n + 1),
+        &:nth-child(4n) {
             background: yellowgreen;
         }
     }

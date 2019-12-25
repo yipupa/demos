@@ -7,28 +7,44 @@ export default class LazyLoader {
      */
     constructor({
         target,
-        root = null,
-        rootMargin = '0px 0px 0px 0px',
-        threshold = 0,
+        options: {
+            root = null,
+            rootMargin = '0px 0px 0px 0px',
+            threshold = 0,
+        },
+        onChange,
     }) {
-        // if (!(target && (target instanceof HTMLElement || target instanceof SVGElement))) {
-        //     console.warn('lazy target wrapper should instanceof HTMLElement or SVGElement!')
-        //     return;
-        // }
         this.target = target;
         this.options = { root, rootMargin, threshold };
+        this.onChange = onChange;
 
         this.init();
     }
 
     init() {
-        console.log('options', this.options)
         const observer = new IntersectionObserver(this.handleChange, this.options);
         this.observer = observer;
-        window.observer = observer;
-        // observer.observe.apply(null, this.target);
-        // observer.observe(this.target);
-        // observer.observe(this.observer.root.children[1]);
+        this.handlObserve(this.target);
+    }
+
+    handlObserve(target) {
+        if (!target) {
+            return;
+        }
+        const root = this.options.root || this.observer.root;
+        if (target instanceof Element && root.contains(target)) {
+            this.observer.observe(target);
+        } else if (Object.prototype.toString.call(target) === '[object Array]' || Object.prototype.toString.call(target) === '[object HTMLCollection]') {
+            for (let index = 0; index < target.length; index++) {
+                const element = target[index];
+                if (element instanceof Element && root.contains(element)) {
+                    this.handlObserve(element);
+                }
+            }
+        } else {
+            console.warn('target should instanceof Element!')
+            return;
+        }
     }
 
     destroy() {
@@ -44,37 +60,15 @@ export default class LazyLoader {
     }
 
     handleChange = (entries, observer) => {
-        console.log(entries, observer)
+        this.onChange && this.onChange(entries, observer);
         // for (const change of entries) {
-        //     console.log(change.time);
-        //     // Timestamp when the change occurred
-        //     // 当可视状态变化时，状态发送改变的时间戳
-        //     // 对比时间为，实例化的时间，
-        //     // 比如，值为1000时，表示在IntersectionObserver实例化的1秒钟之后，触发该元素的可视性变化
-    
-        //     console.log(change.rootBounds);
-        //     // Unclipped area of root
-        //     // 根元素的矩形区域信息，即为getBoundingClientRect方法返回的值
-    
-        //     console.log(change.boundingClientRect);
-        //     // target.boundingClientRect()
-        //     // 目标元素的矩形区域的信息
-    
-        //     console.log(change.intersectionRect);
-        //     // boundingClientRect, clipped by its containing block ancestors,
-        //     // and intersected with rootBounds
-        //     // 目标元素与视口（或根元素）的交叉区域的信息
-    
-        //     console.log(change.intersectionRatio);
-        //     // Ratio of intersectionRect area to boundingClientRect area
-        //     // 目标元素的可见比例，即intersectionRect占boundingClientRect的比例，
-        //     // 完全可见时为1，完全不可见时小于等于0
-    
-        //     console.log(change.target);
-        //     // the Element target
-        //     // 被观察的目标元素，是一个 DOM 节点对象
-        //     // 当前可视区域正在变化的元素
-    
+            // boundingClientRect 目标元素的矩形信息
+            // intersectionRatio 相交区域和目标元素的比例值 intersectionRect/boundingClientRect 不可见时小于等于0
+            // intersectionRect 目标元素和视窗（根）相交的矩形信息 可以称为相交区域
+            // isIntersecting 目标元素当前是否可见 Boolean值 可见为true
+            // rootBounds 根元素的矩形信息，没有指定根元素就是当前视窗的矩形信息
+            // target 观察的目标元素
+            // time 返回一个记录从IntersectionObserver的时间到交叉被触发的时间的时间戳
         // }
     }
 }

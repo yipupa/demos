@@ -16,11 +16,41 @@
         svg {
             overflow: visible;
         }
+
+        .btn {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 50px;
+        }
+        #btn1 {
+            left: 50px;
+            background: red;
+        }
+        #btn2 {
+            left: 105px;
+            background: green;
+        }
     </style>
 </head>
 
 <body>
+    <div id="btn1" class="btn">btn1</div>
+    <div id="btn2" class="btn">btn2</div>
 </body>
+<script>
+    const $btn1 = document.getElementById('btn1');
+    const $btn2 = document.getElementById('btn2');
+    $btn1.addEventListener('click', onClick1)
+    $btn2.addEventListener('click', onClick2)
 
+    function onClick1(e) {
+        console.log('onClick1---------')
+    }
+    function onClick2(e) {
+        console.log('onClick2---------')
+    }
+</script>
 <script src="./test.js"></script>
+
 </html>
