@@ -49,7 +49,6 @@ export default class LazyLoader {
 
     destroy() {
         if (this.observer) {
-            this.observer.unobserve(this.target);
             this.observer.disconnect();
         }
     }
