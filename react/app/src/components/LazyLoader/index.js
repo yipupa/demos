@@ -1,3 +1,5 @@
+import './intersection-observer';
+
 export default class LazyLoader {
     /**
      * @param {target} An element whose visibility within the root is to be monitored. This element must be a descendant of the root element (or contained wtihin the current document, if the root is the document's viewport).

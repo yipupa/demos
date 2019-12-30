@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-    <title>轮播图</title>
+    <title>test</title>
     <style>
         * {
             padding: 0;
@@ -23,32 +23,70 @@
             position: absolute;
             top: 50px;
         }
+
         #btn1 {
             left: 50px;
             background: red;
         }
+
         #btn2 {
             left: 105px;
             background: green;
+        }
+
+        video {
+            max-width: 400px;
         }
     </style>
 </head>
 
 <body>
-    <div id="btn1" class="btn">btn1</div>
-    <div id="btn2" class="btn">btn2</div>
+    <input id="upload" multiple type="file" /><span id="size"></span>
+    <button id="btn">upload</button>
+    <video controls src="http://127.0.0.1:7777/source/videos/input.mp4"></video>
 </body>
 <script>
-    const $btn1 = document.getElementById('btn1');
-    const $btn2 = document.getElementById('btn2');
-    $btn1.addEventListener('click', onClick1)
-    $btn2.addEventListener('click', onClick2)
+    const $btn = document.getElementById('btn');
+    const $input = document.getElementById('upload');
+    const $size = document.getElementById('size');
+    $btn.addEventListener('click', onClick);
+    $input.addEventListener('change', onChange);
 
-    function onClick1(e) {
-        console.log('onClick1---------')
+    function onChange(e) {
+        // $input.click();
+        const file = $input.files[0];
+        if (file) {
+            $size.innerText = file.size + 'byte';
+        }
     }
-    function onClick2(e) {
-        console.log('onClick2---------')
+
+    function onClick(e) {
+        const fileList = $input.files;
+        if (fileList.length) {
+            const formdata = new FormData();
+            for (let index = 0; index < fileList.length; index++) {
+                const file = fileList[index];
+                formdata.append("file", file, file.name);
+            }
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('post', 'http://127.0.0.1:7777/upload/file', true);
+
+            // xhr.onreadystatechange = function () {
+            //     if (xhr.readyState == 4 && xhr.status == 200) {
+            //         console.log('upload success!!!!!!!!')
+            //     }
+            // }
+            xhr.onload = function () {
+                console.log('upload success!!!!!!!!');
+            }
+            xhr.upload.onprogress = function (event) {
+                if (event.lengthComputable) {
+                    console.log('onprogress', event.loaded, event.total, event.loaded / event.total * 100 + '%')
+                }
+            }
+            xhr.send(formdata);
+        }
     }
 </script>
 <script src="./test.js"></script>

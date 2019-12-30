@@ -9898,7 +9898,8 @@ window.addEventListener('load', function () {
     function init() {
         const xhr = new XMLHttpRequest();
         const timestamp = new Date().getTime();
-        const url = 'http://127.0.0.1:7777/proxy/containers?_t=' + timestamp;
+        // const url = 'http://127.0.0.1:7777/proxy/containers?_t=' + timestamp;
+        const url = 'http://127.0.0.1:7777/proxy/branch';
         xhr.open('GET', url);
         xhr.send();
         xhr.onload = function () {
