@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>catalog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .ctn {
+            width: 500px;
+            height: 600px;
+            margin: 100px auto;
+            box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3);
+            /* counter-reset: section 1; */
+        }
+
+        /* details {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        details::after {
+            position: absolute;
+            content: counter(chapter);
+            width: 20px;
+            left: 0;
+            top: 0;
+        }
+
+        .details {
+            counter-increment: chapter;
+        }
+
+        summary {
+            counter-increment: section;
+
+            position: relative;
+            padding-left: 20px;
+        }
+
+        summary::after {
+            position: absolute;
+            content: counter(section);
+            width: 20px;
+            left: 0;
+            top: 0;
+        } */
+
+        .ctn {
+            counter-reset: chapter 0;
+        }
+
+        .counter {
+            counter-increment: chapter;
+            /* counter-reset: section; */
+            position: relative;
+            /* padding-top: 20px; */
+        }
+
+        .counter::before {
+            content: counters(chapter, '-');
+        }
+
+        .reset {
+            padding-left: 40px;
+            counter-reset: chapter;
+        }
+
+        /* .section { */
+        /* counter-increment: section; */
+        /* padding-left: 40px;
+        } */
+        /* 
+        .section::before {
+            content: counter(chapter)"-"counter(section);
+        } */
+    </style>
+</head>
+
+<body>
+    <div class="ctn">
+        <!-- <details class="chapter">
+            <summary class="section_1_1">chapter</summary> -->
+        <!-- <details class="chapter_1">
+                <summary>chapter_1</summary>
+                <div>chapter_1 11111111</div>
+            </details>
+            <details class="chapter_2">
+                <summary>chapter_2</summary>
+                <div>chapter_2 2222222222222</div>
+            </details> -->
+        <!-- </details> -->
+        <!-- <details>
+            <summary>2</summary>
+            2222222222
+            <details>
+                <summary>222222</summary>
+                <div>ssdasdasdasd</div>
+            </details>
+        </details> -->
+        <div class="reset">
+            <div class="counter">
+                第1章
+                <div class="reset">
+                    <div class="counter">
+                        第1节
+                        <div class="reset">
+                            <div class="counter">第1段</div>
+                            <div class="counter">第2段</div>
+                            <div class="counter">第3段</div>
+                            <div class="counter">第4段</div>
+                        </div>
+                    </div>
+                    <div class="counter">
+                        第2节
+                        <div class="reset">
+                            <div class="counter">第1段</div>
+                            <div class="counter">第2段</div>
+                            <div class="counter">第3段</div>
+                            <div class="counter">第4段</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="counter">
+                第2章
+                <div class="reset">
+                    <div class="counter">
+                        第1节
+                        <div class="reset">
+                            <div class="counter">第1段</div>
+                            <div class="counter">第2段</div>
+                            <div class="counter">第3段</div>
+                            <div class="counter">第4段</div>
+                        </div>
+                    </div>
+                    <div class="counter">
+                        第2节
+                        <div class="reset">
+                            <div class="counter">第1段</div>
+                            <div class="counter">第2段</div>
+                            <div class="counter">第3段</div>
+                            <div class="counter">第4段</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

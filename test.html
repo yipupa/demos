@@ -5,90 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-    <title>test</title>
-    <style>
-        * {
-            padding: 0;
-            margin: 0;
-        }
-
-        svg {
-            overflow: visible;
-        }
-
-        .btn {
-            width: 50px;
-            height: 50px;
-            position: absolute;
-            top: 50px;
-        }
-
-        #btn1 {
-            left: 50px;
-            background: red;
-        }
-
-        #btn2 {
-            left: 105px;
-            background: green;
-        }
-
-        video {
-            max-width: 400px;
-        }
-    </style>
+    <title>Document</title>
 </head>
 
 <body>
-    <input id="upload" multiple type="file" /><span id="size"></span>
-    <button id="btn">upload</button>
-    <video controls src="http://127.0.0.1:7777/source/videos/input.mp4"></video>
+    <div>
+        asdada<textarea name="" id="box" cols="30" rows="10"></textarea>
+    </div>
 </body>
 <script>
-    const $btn = document.getElementById('btn');
-    const $input = document.getElementById('upload');
-    const $size = document.getElementById('size');
-    $btn.addEventListener('click', onClick);
-    $input.addEventListener('change', onChange);
-
-    function onChange(e) {
-        // $input.click();
-        const file = $input.files[0];
-        if (file) {
-            $size.innerText = file.size + 'byte';
+    const $box = document.getElementById('box');
+    $box.addEventListener('focus', () => {
+        // $box.select();
+    });
+    document.addEventListener("selectionchange", function (e) {
+        console.log(e.target)
+        if (window.getSelection) {
+            // var textObj = document.getElementById("content");
+            selection = window.getSelection();
+            console.log(selection)
+        } else {
+            return
         }
-    }
-
-    function onClick(e) {
-        const fileList = $input.files;
-        if (fileList.length) {
-            const formdata = new FormData();
-            for (let index = 0; index < fileList.length; index++) {
-                const file = fileList[index];
-                formdata.append("file", file, file.name);
-            }
-
-            const xhr = new XMLHttpRequest();
-            xhr.open('post', 'http://127.0.0.1:7777/upload/file', true);
-
-            // xhr.onreadystatechange = function () {
-            //     if (xhr.readyState == 4 && xhr.status == 200) {
-            //         console.log('upload success!!!!!!!!')
-            //     }
-            // }
-            xhr.onload = function () {
-                console.log('upload success!!!!!!!!');
-            }
-            xhr.upload.onprogress = function (event) {
-                if (event.lengthComputable) {
-                    console.log('onprogress', event.loaded, event.total, event.loaded / event.total * 100 + '%')
-                }
-            }
-            xhr.send(formdata);
-        }
-    }
+    });
 </script>
-<script src="./test.js"></script>
 
 </html>

@@ -1,27 +1,20 @@
 <template>
   <div class="hello">
-    <ul>
-      <li :key="index" @click="item.num++" v-for="(item, index) in list">{{item.num}}</li>
-    </ul>
-  </div>
+    <h1>{{ msg }}</h1>
+    </div>
 </template>
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: 'HelloWorld',
   props: {
     msg: String
-  },
-  data() {
-    return {
-        list: [{ num: 111 }, { num: 222 }]
-    }
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
 h3 {
   margin: 40px 0 0;
 }
