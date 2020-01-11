@@ -17,20 +17,32 @@
     <video controls src="http://127.0.0.1:7777/source/files/media1.mp4"></video>
 </body>
 <script>
-    const $box = document.getElementById('box');
-    $box.addEventListener('focus', () => {
-        // $box.select();
-    });
-    document.addEventListener("selectionchange", function (e) {
-        console.log(e.target)
-        if (window.getSelection) {
-            // var textObj = document.getElementById("content");
-            selection = window.getSelection();
-            console.log(selection)
-        } else {
-            return
+    function fn(target, key, descriptor) {
+        console.log(target, key, descriptor)
+    }
+
+    class Test {
+        constructor(num) {
+            this.num = num;
         }
-    });
+
+        @fn
+        say() {
+            console.log(this.num);
+        }
+    }
+
+    // Test.prototype = {
+    //     say: function () {
+    //         console.log(this.num);
+    //     },
+    //     double: function () {
+    //         this.num *= 2;
+    //     }
+    // }
+
+
+
 </script>
 
 </html>

@@ -7,7 +7,9 @@ import './App.scss';
 // import Algorithm from './algorithm';
 // import Test from './Test';
 // import ThirdpartyDocer from './components/ThirdpartyDocer/index'
-import List from './components/List';
+// import List from './components/List';
+
+import './test';
 
 class App extends Component {
     state = {
@@ -45,7 +47,7 @@ class App extends Component {
                     showDialog &&
                     <ThirdpartyDocer />
                 } */}
-                <List />
+                {/* <List /> */}
                 <div
                     id="btn"
                     // onClick={this.handleClick}
