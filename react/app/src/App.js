@@ -8,8 +8,9 @@ import './App.scss';
 // import Test from './Test';
 // import ThirdpartyDocer from './components/ThirdpartyDocer/index'
 // import List from './components/List';
+import Test from './components/Test'
 
-import './test';
+// import './test';
 
 class App extends Component {
     state = {
@@ -53,6 +54,7 @@ class App extends Component {
                     // onClick={this.handleClick}
                     className="btn"
                 >9</div>
+                <Test />
             </div>
         );
     }
