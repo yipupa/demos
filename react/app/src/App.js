@@ -11,16 +11,21 @@ import './App.scss';
 import Test from './components/Test'
 
 // import './test';
+import List from './components/List';
+// import Demo from './components/Demo';
 
 class App extends Component {
     state = {
-        showDialog: false
+        showDialog: false,
+        index: 0,
     }
 
-
     componentDidMount() {
-        const $btn = document.getElementById('btn');
-        $btn.addEventListener('click', this.handleClick)
+        // const $btn = document.getElementById('btn');
+        // $btn.addEventListener('click', this.handleClick)
+
+        
+
     }
 
     onClick = () => {
@@ -30,11 +35,25 @@ class App extends Component {
     }
 
     handleClick = e => {
-        console.log('handleClick---------')
+        // this.setState({
+        //     index: this.state.index + 1
+        // })
+        // this.setState({
+        //     index: this.state.index + 3
+        // })
+        // this.setState({
+        //     index: this.state.index + 2
+        // })
+        // setTimeout(() => {
+        //     this.setState({
+        //         index: this.state.index + 1
+        //     })
+        // })
     }
 
     render() {
-        // const { showDialog } = this.state
+        // const { showDialog, name } = this.state
+        // console.log(this.state.index);
         return (
             <div className="App">
                 {/* <MoveAnimation /> */}
@@ -48,13 +67,14 @@ class App extends Component {
                     showDialog &&
                     <ThirdpartyDocer />
                 } */}
-                {/* <List /> */}
-                <div
+                <List />
+                {/* <Demo /> */}
+                {/* <div
                     id="btn"
-                    // onClick={this.handleClick}
+                    onClick={this.handleClick}
                     className="btn"
-                >9</div>
-                <Test />
+                >change name</div>
+                <button onClick={() => this.forceUpdate()}>force update</button> */}
             </div>
         );
     }
