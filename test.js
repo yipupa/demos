@@ -51,3 +51,40 @@
 //     console.log('beforeunload', Date.now())
 //     // return 'beforeunload'
 // }, true)
+
+
+
+
+const express = require('express')
+const app = express()
+
+// 设置跨域
+app.all('*', (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With')
+    res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS')
+    res.header('X-Powered-By', '3.2.1')
+    res.header('Content-type', 'application/json;charset=utf-8')
+    next()
+})
+
+/**
+ * @param req 客户端传来的请求实例
+ * @param res 返回给客户端的响应实例
+ */
+app.get('/test1', (req, res) => {
+    res.status(200)
+    res.json({ msg: 'hhhhhh' })
+})
+
+app.post('/test2', (req, res) => {
+    res.status(200)
+    res.json({ msg: 'hhhhhh' })
+})
+
+// 配置服务端口
+const server = app.listen(3000, () => {
+    const host = server.address().address
+    const port = server.address().port
+    console.log('Listen at http://%s:%s', host, port)
+})
