@@ -1,0 +1,12 @@
+npm
+1.0.0
+view
+[ 'C:\\Program Files\\nodejs\\node.exe',
+  'F:\\git\\npm\\index.js',
+  '--type',
+  'view',
+  '--msg',
+  'sb',
+  '--do',
+  '--',
+  'name' ]

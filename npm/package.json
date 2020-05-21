@@ -1,0 +1,21 @@
+{
+  "name": "npm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "jslint **/*.js",
+    "prebuild": "echo I run before the build script",
+    "build": "echo build",
+    "postbuild": "echo I run after the build script",
+    "view": "node index.js --type view --msg sb --do -- name cross-env NODE_ENV=production",
+    "view1": "echo $npm_package_scripts_view",
+    "env": "env"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jslint": "^0.12.1"
+  }
+}

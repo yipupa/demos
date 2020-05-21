@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #container {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #slide {
+            width: 2000px;
+            height: 2000px;
+            flex-shrink: 0;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="slide">
+            <img draggable="false" src="https://www.baidu.com/img/baidu_jgylogo3.gif" alt="">
+        </div>
+    </div>
+</body>
+<script src="./index.js"></script>
+</html>
