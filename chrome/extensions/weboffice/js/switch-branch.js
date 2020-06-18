@@ -9768,7 +9768,14 @@ window.addEventListener('load', function () {
     const $searchInput = document.getElementById('search');
     const $searchBranch = document.getElementById('search_branch');
     const $branchName = document.getElementById('branch_name');
+    const $resetBtn = document.getElementById('reset');
     let branchList;
+
+    $resetBtn.addEventListener('click', reset)
+
+    function reset() {
+        chrome.tabs.reload();
+    }
 
     function setCookies({ url, name, value, path = '/', domain, expirationDate, callback }) {
         const param = {

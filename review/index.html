@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // /**
+    //  *pool
+    //  */
+    // function Pool(max) {
+    //     this.max = max;
+    //     this.activeLength = 0;
+    //     this.taskQueue = [];
+    // }
+
+    // Pool.getInstance = function(max) {
+    //     return Pool.instance || new Pool(max);
+    // }
+
+    // Pool.prototype.call = function(caller, ...args) {
+    //     // return new Promise((resolve, reject) => {
+    //     //     const task = this.wrapTask(caller, args, resolve, reject);
+    //     //     if (this.activeLength >= this.max) {
+    //     //         this.taskQueue.push(task);
+    //     //     } else {
+    //     //         task();
+    //     //     }
+    //     // })
+    //     const task = this.wrapTask(caller, args);
+    //     if (this.activeLength >= this.max) {
+    //         this.taskQueue.push(task);
+    //     } else {
+    //         task();
+    //     }
+    // }
+
+    // Pool.prototype.wrapTask = function(caller, args, resolve, reject) {
+    //     return () => {
+    //         caller(...args)
+    //             // .then(resolve)
+    //             // .catch(reject)
+    //             .finally(() => {
+    //                 this.activeLength--;
+    //                 if (this.taskQueue.length) {
+    //                     const task = this.taskQueue.shift();
+    //                     task && task();
+    //                 }
+    //             });
+    //         this.activeLength++;
+    //     }
+    // }
+
+    // Pool.prototype.next = function() {
+    //     this.activeLength--;
+    //     if (this.taskQueue.length) {
+    //         const task = this.taskQueue.shift();
+    //         task && task();
+    //     }
+    // }
+
+    // function fn() {
+    //     return new Promise((resolve) => {
+    //         setTimeout(() => {
+    //             resolve();
+    //             console.log('task------')
+    //         }, 1000)
+    //     })
+    // }
+
+    // const queue = Pool.getInstance(6);
+    // queue.call(fn);
+    // queue.call(fn);
+    // queue.call(fn);
+    // queue.call(fn);
+    // queue.call(fn);
+    // queue.call(fn);
+    // queue.call(fn);
+    // queue.call(fn);
+    // queue.call(fn);
+    // queue.call(fn);
+    // queue.call(fn);
+    // queue.call(fn);
+
+    /**
+     * 
+     */
+    function Pool() {
+        
+    }
+
+    /**
+     *async/await
+     *generator 
+     */
+
+    const getData = () => new Promise(resolve => setTimeout(() => void resolve('data'), 1000))
+
+    // async function test() {
+    //     const data1 = await getData();
+    //     console.log('data1：', data1);
+    //     const data2 = await getData();
+    //     console.log('data2：', data2);
+    //     return 'success';
+    // }
+    // test()
+
+    function* testG() {
+        const data1 = yield getData();
+        console.log('data1:', data1);
+        throw new Error('1111')
+        const data2 = yield getData();
+        console.log('data2:', data2)
+        return 'success';
+    }
+    // const gen = testG();
+    // let dataPromise = gen.next()
+    // dataPromise.then(value1 => {
+    //     dataPromise = gen.next(value1);
+    //     dataPromise.then(value2 => {
+    //         gen.next(value2);
+    //     })
+    // })
+
+    function asyncToGenerator(generator) {
+        return () => {
+            const gen = generator();
+            return new Promise((resolve, reject) => {
+                function step(key, arg) {
+                    console.log(key)
+                    let result;
+                    try {
+                        result = gen[key](arg);
+                    } catch (error) {
+                        return reject(error);
+                    }
+                    const { done, value } = result;
+                    if (done) {
+                        return resolve(value);
+                    } else {
+                        return Promise.resolve(value).then(val => step('next', val), err => step('throw', err)).catch(err => step('throw', err))
+                    }
+                }
+                step('next');
+            })
+        }
+    }
+
+    const generatorTest = asyncToGenerator(testG);
+    generatorTest().then(result => {
+        console.log(result)
+    }, err => {
+        console.log(err)
+    })
+    .catch(err => {
+        console.log(err)
+    })
+
+    // function asyncToGenerator(generator) {
+    //     return new Promise((resolve) => {
+    //         const gen = generator();
+    //         let next = gen.next();
+    //         while(!next.done) {
+    //             next = gen.next()
+    //         }
+    //         resolve(next.value);
+    //     })
+    // }
+
+    // asyncToGenerator(testG).then(res => {
+    //     console.log(res)
+    // })
+
+</script>
+</html>
